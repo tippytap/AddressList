@@ -1,17 +1,26 @@
 /**
- * AddressList.java - specifics here
+ * AddressList.java - Maintains a list of Address records and methods to access them
  * @author erikmiller
  * @version 1.0
  */
 
 public class AddressList {
 	
+	// keeps track of the beginning of the list
 	private ListNode head;
+
+	// keeps track of the last node added
 	private ListNode currentNode;
+
 	private boolean isEmpty;
 	
+	/**
+	 * Creates a new address list
+	 * */
 	public AddressList(){
 		isEmpty = true;
+		head = null;
+		currentNode = head;
 	}
 	
 	 /**
@@ -54,42 +63,101 @@ public class AddressList {
 	// ======================================
 	// Include your code here
 	//======================================
-
+	 
+	 /**
+	  * Tells if the list is empty or not
+	  * @return boolean
+	  * */
 	 public boolean isEmpty(){
 		 return this.isEmpty;
 	 }
 	 
+	 /**
+	  * Adds a node to the front of the list, before the head
+	  * @param name String
+	  * @param tel String
+	  * @param email String
+	  * @param address String
+	  * @param dob String
+	  * */
 	 public void addToFront(String name, String tel, String email, String address, String dob){}
 
+	 /**
+	  * Adds a node to the back of the list, after the currentNode
+	  * @param name String
+	  * @param tel String
+	  * @param email String
+	  * @param address String
+	  * @param dob String
+	  * */
 	 public void addToBack(String name, String tel, String email, String address, String dob){
 		 
 	 }
 
+	 /**
+	  * Lists string representations of all the list nodes in reverse order
+	  * @return String
+	  * */
 	 public String reverseToString(){
 		 return "";
 	 }
 	 
+	 /**
+	  * Returns the list in reverse order
+	  * @return AddressList
+	  * */
 	 public AddressList reverse(){
 		 return new AddressList();
 	 }
 	 
+	 /**
+	  * Returns the number of list nodes
+	  * @return int 
+	  * */
 	 public int sizeOf(){
 		 return -1;
 	 }
 	 
+	 /**
+	  * Finds and retrieves a phone number record
+	  * @param name String
+	  * @return String
+	  * */
 	 public String phoneNumberByName(String name){
 		 return "";
 	 }
 	 
+	 /**
+	  * Finds and retrieves an email record
+	  * @param name String
+	  * @return String
+	  * */
 	 public String emailByName(String name){
 		 return "";
 	 }
 
+	 /**
+	  * Finds and retrieves a name record
+	  * @param tel String
+	  * @return String
+	  * */
 	 public String nameByPhoneNumber(String tel){
 		 return "";
 	 }
 
+	 /**
+	  * Finds and retrieves a date of birth record
+	  * @param name String
+	  * @return String
+	  * */
 	 public String dobByName(String name){
+		 return "";
+	 }
+	 /**
+	  * Returns a string representation of all the list nodes in the list
+	  * @return String
+	  * */
+	 public String toString(){
 		 return "";
 	 }
 

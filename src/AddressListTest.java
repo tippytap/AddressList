@@ -15,11 +15,13 @@ import org.junit.Test;
  */
 public class AddressListTest {
 
+	public static AddressList addresses;
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
+		addresses = new AddressList();
 	}
 
 	/**
@@ -27,7 +29,7 @@ public class AddressListTest {
 	 */
 	@Test
 	public void testAddressList() {
-		fail("Not yet implemented");
+		assertTrue(addresses != null);
 	}
 
 	/**
@@ -35,7 +37,8 @@ public class AddressListTest {
 	 */
 	@Test
 	public void testIsEmpty() {
-		fail("Not yet implemented");
+		assertTrue(addresses.isEmpty());
+		// TODO add test for when one of the add to methods are working
 	}
 
 	/**
