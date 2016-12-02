@@ -66,7 +66,15 @@ public class AddressListTest {
 				"123 Main St. Christiansburg, VA 24073", 
 				"1987-02-04"
 		);
-		assertEquals("John Doe", addresses.nameByPhoneNumber("5555-555-5555"));
+		assertFalse(addresses.isEmpty());
+		addresses.addToFront(
+				"Jane Doe", 
+				"555-555-5444", 
+				"jane.doe@email.com", 
+				"222 Main St. Christiansburg, VA 24073", 
+				"1987-02-05"
+		);
+		assertTrue(addresses.nameByPhoneNumber("555-555-5444").equals("Jane Doe"));
 	}
 
 	/**
@@ -81,7 +89,22 @@ public class AddressListTest {
 				"123 Main St. Christiansburg, VA 24073", 
 				"1987-02-04"
 		);
-		assertEquals("John Doe", addresses.nameByPhoneNumber("5555-555-5555"));
+		addresses.addToBack(
+				"Jane Doe", 
+				"555-555-5444", 
+				"jane.doe@email.com", 
+				"222 Main St. Christiansburg, VA 24073", 
+				"1987-02-05"
+		);
+		addresses.addToBack(
+				"Matt Doe", 
+				"555-555-5333", 
+				"mattd@email.com", 
+				"333 Main St. Christiansburg, VA 24073", 
+				"1987-02-06"
+		);
+		assertFalse(addresses.isEmpty());
+		assertTrue(addresses.nameByPhoneNumber("555-555-5333").equals("Matt Doe"));
 	}
 
 	/**
@@ -126,7 +149,8 @@ public class AddressListTest {
 			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
 		}
 		addresses.reverse();
-		assertEquals(addresses.toString(), addresses.reverseToString());
+		fail("testReverse");
+//		assertEquals(addresses.toString(), addresses.reverseToString());
 	}
 
 	/**
@@ -137,6 +161,7 @@ public class AddressListTest {
 		for(String[] record : records){
 			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
 		}
+//		System.out.println(addresses.sizeOf());
 		assertTrue(addresses.sizeOf() == 3);
 	}
 
@@ -150,6 +175,8 @@ public class AddressListTest {
 		}
 		String expected = "555-555-5555";
 		assertEquals(expected, addresses.phoneNumberByName("John Doe"));
+		expected = "Record not found";
+		assertEquals(expected, addresses.phoneNumberByName("Jimmy Doe"));
 	}
 
 	/**
@@ -162,6 +189,16 @@ public class AddressListTest {
 		}
 		String expected = "jane.doe@email.com";
 		assertEquals(expected, addresses.emailByName("Jane Doe"));
+		addresses.addToBack(
+				"Jane Doe", 
+				"555-555-5444", 
+				"jane.doe@email.com", 
+				"222 Main St. Christiansburg, VA 24073", 
+				"1987-02-05"
+		);
+		assertEquals(expected, addresses.emailByName("Jane Doe"));
+		expected = "Record not found";
+		assertEquals(expected, addresses.emailByName("Jimmy Doe"));
 	}
 
 	/**
@@ -174,6 +211,8 @@ public class AddressListTest {
 		}
 		String expected = "Matt Doe";
 		assertEquals(expected, addresses.nameByPhoneNumber("555-555-5333"));
+		expected = "Record not found";
+		assertEquals(expected, addresses.emailByName("Jimmy Doe"));
 	}
 
 	/**
@@ -186,6 +225,8 @@ public class AddressListTest {
 		}
 		String expected = "1987-02-04";
 		assertEquals(expected, addresses.dobByName("John Doe"));
+		expected = "Record not found";
+		assertEquals(expected, addresses.emailByName("Jimmy Doe"));
 	}
 
 }
