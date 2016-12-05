@@ -106,7 +106,7 @@ public class AddressList {
 			 ListNode newNode = new ListNode(name, tel, email, address, dob);
 			 traverseToEnd();
 			 currentNode.setNext(newNode);
-			 currentNode = head;
+			 rewind();
 		 }
 	 }
 	 
