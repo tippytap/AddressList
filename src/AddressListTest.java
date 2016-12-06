@@ -172,6 +172,29 @@ public class AddressListTest {
 				"1987-02-07"
 		);
 		assertTrue(addresses.sizeOf() == 4);
+		
+
+	}
+	
+	@Test
+	public void testSizeOfOne(){
+		
+		AddressList adds = new AddressList();
+		adds.addToFront(
+				"Mike Doe", 
+				"555-555-2222", 
+				"mdoe3@email.com", 
+				"666 Main St. Christiansburg, VA 24073", 
+				"1987-02-07"
+		);
+		assertTrue(adds.sizeOf() == 1);
+
+	}
+
+	@Test
+	public void testSizeOfZero(){
+		
+		assertTrue(addresses.sizeOf() == 0);
 
 	}
 
@@ -269,8 +292,34 @@ public class AddressListTest {
 		for(String[] record : records){
 			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
 		}
-		System.out.println(addresses.toString());
 		assertEquals(expected, addresses.toString());
+	}
+
+	@Test
+	public void testToStringOneRecord(){
+		
+		addresses.addToBack(
+				"John Doe", 
+				"555-555-5555", 
+				"jdoe@email.com", 
+				"123 Main St. Christiansburg, VA 24073", 
+				"1987-02-04"
+		);
+		
+		String expected = 
+				"---------------------------\n"
+			  + "John Doe\n"
+			  + "555-555-5555\n"
+			  + "jdoe@email.com\n"
+			  + "123 Main St. Christiansburg, VA 24073\n"
+			  + "1987-02-04\n"
+			  + "---------------------------\n";
+		assertEquals(expected, addresses.toString());
+	}
+
+	@Test
+	public void testToStringZeroRecords(){
+		assertEquals("", addresses.toString());
 	}
 
 }

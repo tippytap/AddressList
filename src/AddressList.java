@@ -85,8 +85,8 @@ public class AddressList {
 			 ListNode temp = head;
 			 head = new ListNode(name, tel, email, address, dob);
 			 head.setNext(temp);
-			 rewind();
 		 }
+		 rewind();
 		 isEmpty = false;
 	 }
 
@@ -112,11 +112,9 @@ public class AddressList {
 	 
 	 private void traverseToEnd(){
 		 if(currentNode.getNext() == null){
-//			 System.out.println("done");
 			 return;
 		 }
 		 else{
-//			 System.out.println("traversing");
 			 currentNode = currentNode.getNext();
 			 traverseToEnd();
 		 }
@@ -155,7 +153,11 @@ public class AddressList {
 	  * @return int 
 	  * */
 	 public int sizeOf(){
+		 if(head == null)
+			 return 0;
+
 		 if(currentNode.getNext() == null){
+			 rewind();
 			 return 1;
 		 }
 		 else{
@@ -172,7 +174,8 @@ public class AddressList {
 	 public String phoneNumberByName(String name){
 		 String tel = "";
 
-		 if(currentNode.getNext() == null && !currentNode.getName().equals(name))
+		 if(currentNode.getNext() == null && 
+				 !currentNode.getName().equals(name))
 			 tel = "Record not found";
 		 else if(currentNode.getName().equals(name)){
 			 tel = currentNode.getTel();
@@ -203,7 +206,8 @@ public class AddressList {
 	 public String emailByName(String name){
 		 String email = "";
 
-		 if(currentNode.getNext() == null && !currentNode.getName().equals(name))
+		 if(currentNode.getNext() == null && 
+				 !currentNode.getName().equals(name))
 			 email = "Record not found";
 		 else if(currentNode.getName().equals(name)){
 			 email = currentNode.getEmail();
@@ -224,8 +228,8 @@ public class AddressList {
 	  * */
 	 public String nameByPhoneNumber(String tel){
 		 String name = "";
-
-		 if(currentNode.getNext() == null && !currentNode.getTel().equals(tel))
+		 if(currentNode.getNext() == null && 
+				 !currentNode.getTel().equals(tel))
 			 name = "Record not found";
 		 else if(currentNode.getTel().equals(tel)){
 			 name = currentNode.getName();
@@ -247,7 +251,8 @@ public class AddressList {
 	 public String dobByName(String name){
 		 String dob = "";
 
-		 if(currentNode.getNext() == null && !currentNode.getName().equals(name))
+		 if(currentNode.getNext() == null && 
+				 !currentNode.getName().equals(name))
 			 dob = "Record not found";
 		 else if(currentNode.getName().equals(name)){
 			 dob = currentNode.getDob();
@@ -266,13 +271,17 @@ public class AddressList {
 	  * */
 	 public String toString(){
 		 String list = "";
-		 if(currentNode.getNext() != null){
-			 ListNode prev = currentNode;
-			 System.out.println(prev.getName() + "\n");
-			 currentNode = currentNode.getNext();
-			 list += nodeToString(prev) + toString();
+		 if(head != null){
+			 if(currentNode.getNext() == null){
+				 list += nodeToString(currentNode);
+				 rewind();
+			 }
+			 else{
+				 list += nodeToString(currentNode);
+				 currentNode = currentNode.getNext();
+				 list += toString();
+			 }
 		 }
-		 rewind();
 		 return list;
 	 }
 
