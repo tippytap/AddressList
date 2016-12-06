@@ -130,6 +130,18 @@ public class AddressList {
 		 return "";
 	 }
 	 
+	 private String nodeToString(ListNode node){
+		 String list = "";
+		 list += "---------------------------\n";
+		 list += currentNode.getName() + "\n";
+		 list += currentNode.getTel() + "\n";
+		 list += currentNode.getEmail() + "\n";
+		 list += currentNode.getAddr() + "\n";
+		 list += currentNode.getDob() + "\n";
+		 list += "---------------------------\n";
+		 return list;
+	 }
+	 
 	 /**
 	  * Returns the list in reverse order
 	  * @return AddressList
@@ -143,8 +155,13 @@ public class AddressList {
 	  * @return int 
 	  * */
 	 public int sizeOf(){
-		 currentNode = head;
-		 return traverseAndCount(1);
+		 if(currentNode.getNext() == null){
+			 return 1;
+		 }
+		 else{
+			 currentNode = currentNode.getNext();
+			 return 1 + sizeOf();
+		 }
 	 }
 	 
 	 /**
@@ -248,11 +265,15 @@ public class AddressList {
 	  * @return String
 	  * */
 	 public String toString(){
-		 return "";
-	 }
-	 
-	 public int traverseAndCount(int count){
-		 return -1;
+		 String list = "";
+		 if(currentNode.getNext() != null){
+			 ListNode prev = currentNode;
+			 System.out.println(prev.getName() + "\n");
+			 currentNode = currentNode.getNext();
+			 list += nodeToString(prev) + toString();
+		 }
+		 rewind();
+		 return list;
 	 }
 
 }

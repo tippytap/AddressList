@@ -137,7 +137,9 @@ public class AddressListTest {
 		for(String[] record : records){
 			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
 		}
-		assertEquals(expected, addresses.reverseToString());
+//		System.out.println(addresses.reverseToString());
+		fail("testReverseToString");
+//		assertEquals(expected, addresses.reverseToString());
 	}
 
 	/**
@@ -161,8 +163,16 @@ public class AddressListTest {
 		for(String[] record : records){
 			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
 		}
-//		System.out.println(addresses.sizeOf());
 		assertTrue(addresses.sizeOf() == 3);
+		addresses.addToBack(
+				"Mike Doe", 
+				"555-555-2222", 
+				"mdoe3@email.com", 
+				"666 Main St. Christiansburg, VA 24073", 
+				"1987-02-07"
+		);
+		assertTrue(addresses.sizeOf() == 4);
+
 	}
 
 	/**
@@ -227,6 +237,40 @@ public class AddressListTest {
 		assertEquals(expected, addresses.dobByName("John Doe"));
 		expected = "Record not found";
 		assertEquals(expected, addresses.emailByName("Jimmy Doe"));
+	}
+	
+	/**
+	 * Test method for {@link AddressList#toString(java.lang.String)}.
+	 */
+	@Test
+	public void testToString() {
+		String expected = 
+				"---------------------------\n"
+			  + "John Doe\n"
+			  + "555-555-5555\n"
+			  + "jdoe@email.com\n"
+			  + "123 Main St. Christiansburg, VA 24073\n"
+			  + "1987-02-04\n"
+			  + "---------------------------\n"
+			  + "---------------------------\n"
+			  + "Jane Doe\n"
+			  + "555-555-5444\n"
+			  + "jane.doe@email.com\n"
+			  + "222 Main St. Christiansburg, VA 24073\n"
+			  + "1987-02-05\n"
+			  + "---------------------------\n"
+			  + "---------------------------\n"
+			  + "Matt Doe\n"
+			  + "555-555-5333\n"
+			  + "mattd@email.com\n"
+			  + "345 Main St. Christiansburg, VA 24073\n"
+			  + "1987-02-06\n"
+			  + "---------------------------\n";
+		for(String[] record : records){
+			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
+		}
+		System.out.println(addresses.toString());
+		assertEquals(expected, addresses.toString());
 	}
 
 }
