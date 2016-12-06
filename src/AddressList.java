@@ -125,7 +125,20 @@ public class AddressList {
 	  * @return String
 	  * */
 	 public String reverseToString(){
-		 return "";
+		 String list = "";
+		 ListNode prev = currentNode;
+		 if(head != null){
+			 if(currentNode.getNext() == null){
+				 list += "";
+			 }
+			 else{
+				 traverse();
+				 list += reverseToString();
+			 }
+			 currentNode = prev;
+			 list += nodeToString(currentNode);
+		 }
+		 return list;
 	 }
 	 
 	 private String nodeToString(ListNode node){

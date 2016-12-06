@@ -137,9 +137,34 @@ public class AddressListTest {
 		for(String[] record : records){
 			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
 		}
-//		System.out.println(addresses.reverseToString());
-		fail("testReverseToString");
-//		assertEquals(expected, addresses.reverseToString());
+		assertEquals(expected, addresses.reverseToString());
+	}
+
+	@Test
+	public void testReverseToStringOneRecord(){
+		
+		addresses.addToBack(
+				"John Doe", 
+				"555-555-5555", 
+				"jdoe@email.com", 
+				"123 Main St. Christiansburg, VA 24073", 
+				"1987-02-04"
+		);
+		
+		String expected = 
+				"---------------------------\n"
+			  + "John Doe\n"
+			  + "555-555-5555\n"
+			  + "jdoe@email.com\n"
+			  + "123 Main St. Christiansburg, VA 24073\n"
+			  + "1987-02-04\n"
+			  + "---------------------------\n";
+		assertEquals(expected, addresses.reverseToString());
+	}
+	
+	@Test
+	public void testReverseToStringZeroRecords(){
+		assertEquals("", addresses.reverseToString());
 	}
 
 	/**
