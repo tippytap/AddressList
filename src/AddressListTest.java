@@ -175,9 +175,33 @@ public class AddressListTest {
 		for(String[] record : records){
 			addresses.addToBack(record[0], record[1], record[2], record[3], record[4]);
 		}
-		addresses.reverse();
-		fail("testReverse");
-//		assertEquals(addresses.toString(), addresses.reverseToString());
+		String expected = addresses.reverseToString();
+		AddressList addr = addresses.reverse();
+		String actual = addr.toString();
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testReverseOne() {
+		addresses.addToBack(
+				"John Doe", 
+				"555-555-5555", 
+				"jdoe@email.com", 
+				"123 Main St. Christiansburg, VA 24073", 
+				"1987-02-04"
+		);
+		String expected = addresses.reverseToString();
+		AddressList addr = addresses.reverse();
+		String actual = addr.toString();
+		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void testReverseZero() {
+		String expected = addresses.reverseToString();
+		AddressList addr = addresses.reverse();
+		String actual = addr.toString();
+		assertEquals(expected, actual);
 	}
 
 	/**
@@ -272,6 +296,31 @@ public class AddressListTest {
 		expected = "Record not found";
 		assertEquals(expected, addresses.emailByName("Jimmy Doe"));
 	}
+	
+	@Test
+	public void testNameByPhoneNumberTwo(){
+		
+		addresses.addToBack(
+				"Jane Doe", 
+				"555-555-5444", 
+				"jane.doe@email.com", 
+				"222 Main St. Christiansburg, VA 24073", 
+				"1987-02-05"
+		);
+		addresses.addToBack(
+				"Mike Doe", 
+				"555-555-2222", 
+				"mdoe3@email.com", 
+				"666 Main St. Christiansburg, VA 24073", 
+				"1987-02-07"
+		);
+		String expected = "Jane Doe";
+		String actual = addresses.nameByPhoneNumber("555-555-5444");
+		assertEquals(expected, actual);
+		expected = "Mike Doe";
+		actual = addresses.nameByPhoneNumber("555-555-2222");
+		assertEquals(expected, actual);
+	}
 
 	/**
 	 * Test method for {@link AddressList#dobByName(java.lang.String)}.
@@ -285,6 +334,38 @@ public class AddressListTest {
 		assertEquals(expected, addresses.dobByName("John Doe"));
 		expected = "Record not found";
 		assertEquals(expected, addresses.emailByName("Jimmy Doe"));
+	}
+	
+	@Test
+	public void testDobByNameTwoRecords(){
+		
+		addresses.addToBack(
+				"Jane Doe", 
+				"555-555-5444", 
+				"jane.doe@email.com", 
+				"222 Main St. Christiansburg, VA 24073", 
+				"1987-02-05"
+		);
+		addresses.addToBack(
+				"Mike Doe", 
+				"555-555-2222", 
+				"mdoe3@email.com", 
+				"666 Main St. Christiansburg, VA 24073", 
+				"1987-02-07"
+		);
+		addresses.addToBack(
+				"Mike Doe", 
+				"555-555-2222", 
+				"mdoe3@email.com", 
+				"666 Main St. Christiansburg, VA 24073", 
+				"1987-02-07"
+		);
+		String expected = "1987-02-05";
+		String actual = addresses.dobByName("Jane Doe");
+		assertEquals(expected, actual);
+		expected = "1987-02-07";
+		actual = addresses.dobByName("Mike Doe");
+		assertEquals(expected, actual);
 	}
 	
 	/**

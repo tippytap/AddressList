@@ -158,9 +158,24 @@ public class AddressList {
 	  * @return AddressList
 	  * */
 	 public AddressList reverse(){
-		 return new AddressList();
+		 AddressList addresses = new AddressList();
+		 rewind();
+		 reOrderNodes(addresses, head);
+		 return addresses;
 	 }
 	 
+	 private void reOrderNodes(AddressList list, ListNode node){
+		 if(node != null){
+			 if(node.getNext() == null){
+				 list.addToFront(node.getName(), node.getTel(), node.getEmail(), node.getAddr(), node.getDob());
+			 }
+			 else{
+				 list.addToFront(node.getName(), node.getTel(), node.getEmail(), node.getAddr(), node.getDob());
+				 reOrderNodes(list, node.getNext());
+			 }
+		 }
+			 
+	 } 
 	 /**
 	  * Returns the number of list nodes
 	  * @return int 
@@ -189,7 +204,7 @@ public class AddressList {
 
 		 if(currentNode.getNext() == null && 
 				 !currentNode.getName().equals(name))
-			 tel = "Record not found";
+			 tel = "No matching data";
 		 else if(currentNode.getName().equals(name)){
 			 tel = currentNode.getTel();
 			 rewind();
@@ -220,8 +235,10 @@ public class AddressList {
 		 String email = "";
 
 		 if(currentNode.getNext() == null && 
-				 !currentNode.getName().equals(name))
-			 email = "Record not found";
+				 !currentNode.getName().equals(name)){
+			 email = "No matching data";
+			 rewind();
+		 }
 		 else if(currentNode.getName().equals(name)){
 			 email = currentNode.getEmail();
 			 rewind();
@@ -242,8 +259,10 @@ public class AddressList {
 	 public String nameByPhoneNumber(String tel){
 		 String name = "";
 		 if(currentNode.getNext() == null && 
-				 !currentNode.getTel().equals(tel))
-			 name = "Record not found";
+				 !currentNode.getTel().equals(tel)){
+			 name = "No matching data";
+			 rewind();
+		 }
 		 else if(currentNode.getTel().equals(tel)){
 			 name = currentNode.getName();
 			 rewind();
@@ -265,15 +284,17 @@ public class AddressList {
 		 String dob = "";
 
 		 if(currentNode.getNext() == null && 
-				 !currentNode.getName().equals(name))
-			 dob = "Record not found";
+				 !currentNode.getName().equals(name)){
+			 dob = "No matching data";
+			 rewind();
+		 }
 		 else if(currentNode.getName().equals(name)){
 			 dob = currentNode.getDob();
 			 rewind();
 		 }
 		 else{
 			 traverse();
-			 dob = nameByPhoneNumber(name);
+			 dob = dobByName(name);
 		 }
 		 
 		 return dob;
